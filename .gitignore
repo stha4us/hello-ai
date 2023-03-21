@@ -12,6 +12,7 @@ artifacts/*
 __pycache__/
 *.pyc
 forex/*
+!forex/api/
 
 # Executables
 *.swf
