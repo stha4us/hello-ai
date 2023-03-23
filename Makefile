@@ -92,6 +92,7 @@ pipeline: venv
 	. $(VENV_ACTIVATE) && (\
 	echo 'Starting pipeline...' ;\
 	$(MAKE) forex_forecast ;\
+	python -m timeseries.cli ingest-features --multiprocessing "$(MULTIPROCESSING)"
 	)
 
 .PHONY: pipeline
