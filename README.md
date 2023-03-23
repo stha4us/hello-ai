@@ -1,4 +1,5 @@
 # hello-ai
 This project tends to implement machine learning in data analysis.
 
-The experimentations is starting to pay off now :)
+# Forex
+Foreign exchange rate forecasting based on multiple timeseries models

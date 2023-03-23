@@ -85,25 +85,23 @@ clean: clean-venv clean-test ## Cleans project installation.
 # ====== ENVIRONMENT VARIABLE DEFAULTS ======
 ENV?=dev
 AWS_PROFILE_NAME?=
-S3_SILENT_FLAG ?= --quiet
 
 TODAY := $(shell date +%Y-%m-%d)
 
 pipeline: venv
 	. $(VENV_ACTIVATE) && (\
 	echo 'Starting pipeline...' ;\
-	$(MAKE) sync-local-feature-store ;\
-	python -m vc.cli refresh-features --entities "$(ENTITIES)";\
+	$(MAKE) forex_forecast ;\
 	)
 
 .PHONY: pipeline
 
 # ====== RUN PIPELINE COMMANDS ======
 forex_forecast:
-	python forex/api/model/timeseries/run_ingest.py
-	python forex/api/model/timeseries/run_train.py 
-	python forex/api/model/timeseries/run_model_predict.py
-	python forex/api/model/timeseries/run_report.py
+	python forex/model/timeseries/ingest.py
+	python forex/model/timeseries/train.py 
+	python forex/model/timeseries/predict.py
+	python forex/model/timeseries/report.py
 
 .PHONY: forex_forecast
 
