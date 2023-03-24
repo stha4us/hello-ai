@@ -1,10 +1,17 @@
 from utils import helpers as hp
+from path import Path
 import click
-from timeseries.models.timeseriesLSTM import Lstm_univarient as LSTM_MODEL_UNIVARIENT
-from timeseries.models.timeseriesARIMA import Arima_TimeSeries
-from timeseries.models.timeseriesSARIMA import Sarima_TimeSeries
-from timeseries.models.timeseriesSARIMAX import Sarimax_TimeSeries
-from timeseries.models.timeseriesVARMAX import TimeseriesVARMAX
+import sys
+from forex.timeseries.models.timeseriesLSTM import Lstm_univarient as LSTM_MODEL_UNIVARIENT
+from forex.timeseries.models.timeseriesARIMA import Arima_TimeSeries
+from forex.timeseries.models.timeseriesSARIMA import Sarima_TimeSeries
+from forex.timeseries.models.timeseriesSARIMAX import Sarimax_TimeSeries
+from forex.timeseries.models.timeseriesVARMAX import TimeseriesVARMAX
+
+
+PROJECT_ROOT = str(Path(__file__).parent.parent.absolute())
+sys.path.append(PROJECT_ROOT = str(Path(__file__).parent.parent.absolute()))
+
 
 class Helpers(object):
     def __init__(self):
