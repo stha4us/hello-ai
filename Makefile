@@ -39,6 +39,8 @@ PYTHON?=python3
 
 all: venv dev-install ## Creates a new virtual environment and installs the.
 
+.PHONY: all
+
 refresh-env: clean all ## Regenerates the working enviroment and installs the dependencies from scratch.
 
 venv: ## Creates a new virtual environment using venv, with the latest version of pip.
@@ -66,7 +68,7 @@ update-deps: venv ## Updates project dependencies.
 create-env: venv ## Creates .env file based on your general local env.
 	ENV=$(ENV) envsubst < .env.sample > .env ;
 
-.PHONY: dev-install workspace-install prod-install update-deps create-env
+.PHONY: dev-install update-deps create-env
 
 # CLEAN enviroment
 clean-venv: ## Removes virtual environment.
@@ -84,15 +86,14 @@ clean: clean-venv clean-test ## Cleans project installation.
 
 # ====== ENVIRONMENT VARIABLE DEFAULTS ======
 ENV?=dev
-AWS_PROFILE_NAME?=
 
 TODAY := $(shell date +%Y-%m-%d)
 
 pipeline: venv
 	. $(VENV_ACTIVATE) && (\
 	echo 'Starting pipeline...' ;\
+	python -m timeseries.cli ingest-features --multiprocessing "$(MULTIPROCESSING)"\
 	$(MAKE) forex_forecast ;\
-	python -m timeseries.cli ingest-features --multiprocessing "$(MULTIPROCESSING)"
 	)
 
 .PHONY: pipeline
@@ -108,37 +109,6 @@ forex_forecast:
 
 # ====== @TODO DOCKER ======
 
-docker-build: venv
-	. $(VENV_ACTIVATE) && (\
-			docker build -t $(PROJECT_TAG) . -f ./docker/Dockerfile \
-				--build-arg token=$(GITHUB_ACCESS_TOKEN) \
-				--build-arg branch=$(ENV) ;\
-	)
-
-docker-run: venv
-	. $(VENV_ACTIVATE) && (\
-			docker rm forex ;\
-			docker run --name forex \
-				--env-file=.env.docker \
-				-p $(PORT):$(PORT) \
-				-v ${PWD}/forex:/api/forex \
-				-ti $(PROJECT_TAG) ;\
-	)
-
-docker-bash: venv
-	. $(VENV_ACTIVATE) && (\
-			docker rm forex ;\
-			docker run --name forex \
-				--env-file=.env.docker \
-				-p $(PORT):$(PORT) \
-				-v ${PWD}/forex:/api/forex \
-				-v ${PWD}/artifacts:/api/artifacts \
-				-ti $(PROJECT_TAG) \
-				bash ;\
-	)
-
-
-.PHONY: docker-build docker-run docker-bash
 # ====== HELP ======
 
 help: ## Show this help.

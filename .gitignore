@@ -11,8 +11,7 @@ artifacts/*
 .idea
 __pycache__/
 *.pyc
-forex/*
-!forex/api/
+*.sqlite3
 
 # Executables
 *.swf
