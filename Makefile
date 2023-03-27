@@ -39,8 +39,6 @@ PYTHON?=python3
 
 all: venv dev-install ## Creates a new virtual environment and installs the.
 
-.PHONY: all
-
 refresh-env: clean all ## Regenerates the working enviroment and installs the dependencies from scratch.
 
 venv: ## Creates a new virtual environment using venv, with the latest version of pip.
