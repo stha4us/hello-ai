@@ -7,12 +7,12 @@ bin-release/
 # Other files and folders
 .settings/
 artifacts/*
+.env
 .venv
 .idea
 __pycache__/
 *.pyc
-forex/*
-!forex/api/
+*.sqlite3
 
 # Executables
 *.swf
