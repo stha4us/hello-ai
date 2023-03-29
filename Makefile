@@ -90,18 +90,19 @@ TODAY := $(shell date +%Y-%m-%d)
 pipeline: venv
 	. $(VENV_ACTIVATE) && (\
 	echo 'Starting pipeline...' ;\
-	python -m timeseries.cli ingest-features --multiprocessing "$(MULTIPROCESSING)"\
+	python -m timeseries.cli ingest-features --multiprocessing "$(MULTIPROCESSING)";\
+	python -m timeseries.cli train-model --multiprocessing "$(MULTIPROCESSING)" ;\
 	$(MAKE) forex_forecast ;\
 	)
 
 .PHONY: pipeline
 
 # ====== RUN PIPELINE COMMANDS ======
-forex_forecast:
-	python forex/model/timeseries/ingest.py
-	python forex/model/timeseries/train.py 
-	python forex/model/timeseries/predict.py
-	python forex/model/timeseries/report.py
+forex_forecast:(
+	python -m timeseries.cli forecast --multiprocessing "$(MULTIPROCESSING)" ;\
+	python -m timeseries.cli report --multiprocessing "$(MULTIPROCESSING)" ;\
+)
+
 
 .PHONY: forex_forecast
 

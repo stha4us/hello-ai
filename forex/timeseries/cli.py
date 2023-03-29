@@ -2,6 +2,9 @@ from typing import Optional
 
 import click
 from timeseries.ingest import main as ingest_features_main
+from timeseries.forecast import main as forecast_main
+from timeseries.report import main as report_main
+from timeseries.train import main as train_main
 from timeseries.utils import GroupWithCommandOptions
 
 
@@ -46,6 +49,44 @@ def ingest_features(ctx):
         multiprocessing=ctx.obj["multiprocessing"],
     )
 
+@cli.command()
+@click.pass_context
+def train_model(ctx):
+    """
+    CLI group command for refresh_features.py
+    script
+    """
+
+    # ====== execute script's main method ======
+    train_main(
+        multiprocessing=ctx.obj["multiprocessing"],
+    )
+
+@cli.command()
+@click.pass_context
+def forecast(ctx):
+    """
+    CLI group command for refresh_features.py
+    script
+    """
+
+    # ====== execute script's main method ======
+    forecast_main(
+        multiprocessing=ctx.obj["multiprocessing"],
+    )
+
+@cli.command()
+@click.pass_context
+def report(ctx):
+    """
+    CLI group command for refresh_features.py
+    script
+    """
+
+    # ====== execute script's main method ======
+    report_main(
+        multiprocessing=ctx.obj["multiprocessing"],
+    )
 
 if __name__ == "__main__":
     cli()
