@@ -1,5 +1,5 @@
 def main():
-    #scripts to generate reports and vizualization
+    #scripts to forecast
     pass 
 
 if __name__=='__main__':

@@ -1,10 +1,10 @@
 from utils import helpers as hp
 import click
-from timeseries.models.timeseriesLSTM import Lstm_univarient as LSTM_MODEL_UNIVARIENT
-from timeseries.models.timeseriesARIMA import Arima_TimeSeries
-from timeseries.models.timeseriesSARIMA import Sarima_TimeSeries
-from timeseries.models.timeseriesSARIMAX import Sarimax_TimeSeries
-from timeseries.models.timeseriesVARMAX import TimeseriesVARMAX
+from .models.timeseriesLSTM import Lstm_univarient as LSTM_MODEL_UNIVARIENT
+from .models.timeseriesARIMA import Arima_TimeSeries
+from .models.timeseriesSARIMA import Sarima_TimeSeries
+from .models.timeseriesSARIMAX import Sarimax_TimeSeries
+from .models.timeseriesVARMAX import TimeseriesVARMAX
 
 class Helpers(object):
     def __init__(self):
