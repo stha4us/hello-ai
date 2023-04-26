@@ -6,7 +6,9 @@ bin-release/
 
 # Other files and folders
 .settings/
-artifacts/*
+artifacts/gitkeep
+artifacts/*.csv
+!artifacts/experimentations/
 .env
 .venv
 .idea
