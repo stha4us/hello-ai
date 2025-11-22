@@ -210,10 +210,3 @@ class GroupWithCommandOptions(click.Group):
             original_invoke(ctx)
 
         return command_invoke
-
-def main():
-    #scripts to ingest data source
-    pass 
-
-if __name__=='__main__':
-    main()
