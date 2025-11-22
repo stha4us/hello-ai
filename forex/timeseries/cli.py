@@ -38,6 +38,20 @@ def cli(
 
 @cli.command()
 @click.pass_context
+def query(ctx):
+    """
+    CLI group command for refresh_features.py
+    script
+    """
+
+    # ====== execute script's main method ======
+    run_data_pull_main(
+        brand_code_param=ctx.obj["brand_code"],
+        output_dir=ctx.obj["output_dir"],
+    )
+
+@cli.command()
+@click.pass_context
 def ingest_features(ctx):
     """
     CLI group command for refresh_features.py
